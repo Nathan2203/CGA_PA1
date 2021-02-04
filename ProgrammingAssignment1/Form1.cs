@@ -35,6 +35,7 @@ namespace ProgrammingAssignment1
             start_point.Y = e.Y;
             end_point.X = e.X;
             end_point.Y = e.Y;
+            MessageBox.Show(" " + start_point + " & " + end_point);
         }
 
         private void drawingScreen_MouseMove(object sender, MouseEventArgs e)
@@ -81,6 +82,7 @@ namespace ProgrammingAssignment1
 
         private void drawingScreen_Paint(object sender, PaintEventArgs e)
         {
+            /*
             for (int i = 0; i <= MyLines.Count - 1; i++)
             {
                 //int x1 = 120, y1 = 100, x2 = 120, y2 = 300, temp
@@ -277,7 +279,7 @@ namespace ProgrammingAssignment1
             }
 
 
-
+            */
         }
 
         
