@@ -60,9 +60,9 @@ namespace ProgrammingAssignment1
             this.drawingScreen.BackColor = System.Drawing.Color.White;
             this.drawingScreen.Dock = System.Windows.Forms.DockStyle.Fill;
             this.drawingScreen.Location = new System.Drawing.Point(0, 28);
-            this.drawingScreen.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.drawingScreen.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.drawingScreen.Name = "drawingScreen";
-            this.drawingScreen.Size = new System.Drawing.Size(600, 338);
+            this.drawingScreen.Size = new System.Drawing.Size(800, 422);
             this.drawingScreen.TabIndex = 0;
             this.drawingScreen.TabStop = false;
             this.drawingScreen.MouseDown += new System.Windows.Forms.MouseEventHandler(this.drawingScreen_MouseDown);
@@ -76,8 +76,8 @@ namespace ProgrammingAssignment1
             this.editToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Padding = new System.Windows.Forms.Padding(4, 2, 0, 2);
-            this.menuStrip1.Size = new System.Drawing.Size(600, 28);
+            this.menuStrip1.Padding = new System.Windows.Forms.Padding(5, 2, 0, 2);
+            this.menuStrip1.Size = new System.Drawing.Size(800, 28);
             this.menuStrip1.TabIndex = 2;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -93,14 +93,14 @@ namespace ProgrammingAssignment1
             // saveToolStripMenuItem
             // 
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(125, 26);
             this.saveToolStripMenuItem.Text = "Save";
             this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
             // 
             // loadToolStripMenuItem
             // 
             this.loadToolStripMenuItem.Name = "loadToolStripMenuItem";
-            this.loadToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.loadToolStripMenuItem.Size = new System.Drawing.Size(125, 26);
             this.loadToolStripMenuItem.Text = "Load";
             this.loadToolStripMenuItem.Click += new System.EventHandler(this.loadToolStripMenuItem_Click);
             // 
@@ -115,7 +115,7 @@ namespace ProgrammingAssignment1
             // clearScreenToolStripMenuItem
             // 
             this.clearScreenToolStripMenuItem.Name = "clearScreenToolStripMenuItem";
-            this.clearScreenToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.clearScreenToolStripMenuItem.Size = new System.Drawing.Size(174, 26);
             this.clearScreenToolStripMenuItem.Text = "Clear Screen";
             // 
             // toolStrip1
@@ -131,9 +131,9 @@ namespace ProgrammingAssignment1
             this.clearButton,
             this.toolStripSeparator1,
             this.toolStripLabel1});
-            this.toolStrip1.Location = new System.Drawing.Point(534, 28);
+            this.toolStrip1.Location = new System.Drawing.Point(734, 28);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(66, 338);
+            this.toolStrip1.Size = new System.Drawing.Size(66, 422);
             this.toolStrip1.TabIndex = 3;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -204,8 +204,8 @@ namespace ProgrammingAssignment1
             // numericUpDownWidth
             // 
             this.numericUpDownWidth.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.numericUpDownWidth.Location = new System.Drawing.Point(550, 193);
-            this.numericUpDownWidth.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.numericUpDownWidth.Location = new System.Drawing.Point(733, 238);
+            this.numericUpDownWidth.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.numericUpDownWidth.Maximum = new decimal(new int[] {
             5,
             0,
@@ -217,7 +217,7 @@ namespace ProgrammingAssignment1
             0,
             0});
             this.numericUpDownWidth.Name = "numericUpDownWidth";
-            this.numericUpDownWidth.Size = new System.Drawing.Size(37, 24);
+            this.numericUpDownWidth.Size = new System.Drawing.Size(49, 24);
             this.numericUpDownWidth.TabIndex = 4;
             this.numericUpDownWidth.Value = new decimal(new int[] {
             1,
@@ -231,17 +231,18 @@ namespace ProgrammingAssignment1
             // 
             // DrawLine
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(600, 366);
+            this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.numericUpDownWidth);
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.drawingScreen);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "DrawLine";
             this.Text = "DrawLine";
+            this.Load += new System.EventHandler(this.DrawLine_Load);
             ((System.ComponentModel.ISupportInitialize)(this.drawingScreen)).EndInit();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();

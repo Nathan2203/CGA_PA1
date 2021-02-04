@@ -22,8 +22,7 @@ namespace ProgrammingAssignment1
         public DrawLine()
         {
             InitializeComponent();
-            myBitmap = new Bitmap(drawingScreen.Width, drawingScreen.Height);
-            myGraphic = Graphics.FromImage(myBitmap);
+            
         }
 
         private void dotButton_Click(object sender, EventArgs e)
@@ -53,7 +52,6 @@ namespace ProgrammingAssignment1
         {
             drawingScreen.Cursor = Cursors.Cross;
             start_point = new Point(e.X, e.Y);
-            drawingScreen.Image = myBitmap;
         }
 
         private void drawingScreen_MouseUp(object sender, MouseEventArgs e)
@@ -95,18 +93,21 @@ namespace ProgrammingAssignment1
             }
         }
 
+        private void DrawLine_Load(object sender, EventArgs e)
+        {
+            myBitmap = new Bitmap(drawingScreen.Width, drawingScreen.Height);
+            drawingScreen.Image = myBitmap;
+            myGraphic = Graphics.FromImage(myBitmap);
+            drawingScreen.DrawToBitmap(myBitmap, drawingScreen.ClientRectangle);
+        }
+
         public void Line(Point p1, Point p2)
         {
             int dx, dy;
-            float m, n;
+            //float m, n;
             dx = Math.Abs(p2.X - p1.X);
             dy = Math.Abs(p2.Y - p1.Y);
-
-            if (p1.X != p2.X && p1.Y != p2.Y)
-            {
-                m = Math.Abs(dy / dx);
-                n = Math.Abs(dx / dy);
-            }
+            
 
             switch(selected)
             {
@@ -129,7 +130,7 @@ namespace ProgrammingAssignment1
                         }
                         else // 2
                         {
-                            for (int i = p2.X; i >= p1.X; i--)
+                            for (int i = p1.X; i >= p2.X; i--)
                             {
                                 for (int k = 0; k < Convert.ToInt32(numericUpDownWidth.Value); k++)
                                 {
@@ -141,9 +142,9 @@ namespace ProgrammingAssignment1
                     }
                     else if (p1.X == p2.X) //Cover Case 3 & 4
                     {
-                        if (p1.Y > p2.Y) // 3
+                        if (p1.Y < p2.Y) // 3
                         {
-                            for (int i = p1.Y ; i >= p2.Y; i--)
+                            for (int i = p1.Y ; i <= p2.Y; i++)
                             {
                                 for (int k = 0; k < Convert.ToInt32(numericUpDownWidth.Value); k++)
                                 {
@@ -153,7 +154,7 @@ namespace ProgrammingAssignment1
                         }
                         else // 4
                         {
-                            for (int i = p1.Y; i <= p2.Y; i++)
+                            for (int i = p1.Y; i >= p2.Y; i--)
                             {
                                 for (int k = 0; k < Convert.ToInt32(numericUpDownWidth.Value); k++)
                                 {
@@ -165,52 +166,40 @@ namespace ProgrammingAssignment1
                     else if (dx == dy) // Cover Case 5 -8
                     {
                         int j; 
-                        if (p1.X < p2.X && p1.Y > p2.Y) // 5
+                        if (p1.X < p2.X && p1.Y < p2.Y) // 5
                         {
                             j = p1.Y;
                             for (int i = p1.X; i <= p2.X; i++)
                             {
-                                for (int k = 0; k < Convert.ToInt32(numericUpDownWidth.Value); k++)
-                                {
-                                    myBitmap.SetPixel(i, (j + k), lineColor);
-                                }
-                                j--;
+                                myBitmap.SetPixel(i, j, lineColor);
+                                j++;
                             }
                         }
-                        else if (p1.X > p2.X && p1.Y > p2.Y) // 6
+                        else if (p1.X > p2.X && p1.Y < p2.Y) // 6
                         {
-                            j = p1.Y;
-                            for (int i = p1.X; i >= p2.X; i--)
+                            j = p2.Y;
+                            for (int i = p2.X; i <= p1.X; i++)
                             {
-                                for (int k = 0; k < Convert.ToInt32(numericUpDownWidth.Value); k++)
-                                {
-                                    myBitmap.SetPixel(i, (j + k), lineColor);
-                                }
+                                myBitmap.SetPixel(i, j, lineColor);
                                 j--;
                             }
                         }
                         else if (p1.X > p2.X && p1.Y < p2.Y) // 7
                         {
-                            j = p1.Y;
+                            j = p2.Y;
                             for (int i = p1.X; i >= p2.X; i--)
                             {
-                                for (int k = 0; k < Convert.ToInt32(numericUpDownWidth.Value); k++)
-                                {
-                                    myBitmap.SetPixel(i, (j + k), lineColor);
-                                }
+                                myBitmap.SetPixel(i, j, lineColor);
                                 j++;
                             }
                         }
-                        else // p1.X < p2.X && p1.Y < p2.Y ==> 8
+                        else // p1.X < p2.X && p1.Y > p2.Y ==> 8
                         {
                             j = p1.Y;
                             for (int i = p1.X; i <= p2.X; i++)
                             {
-                                for (int k = 0; k < Convert.ToInt32(numericUpDownWidth.Value); k++)
-                                {
-                                    myBitmap.SetPixel(i, (j + k), lineColor);
-                                }
-                                j++;
+                                myBitmap.SetPixel(i, j, lineColor);
+                                j--;
                             }
                         }
                     }
@@ -219,7 +208,7 @@ namespace ProgrammingAssignment1
                     {
                         if (p2.X > p1.X)
                         {
-                            if (p2.Y > p1.Y) // 16
+                            if (p2.Y > p1.Y) // 9
                             {
                                 int dR = 2 * dy;
                                 int dUR = 2 * (dy - dx);
@@ -228,35 +217,11 @@ namespace ProgrammingAssignment1
                                 int x = p1.X;
                                 int y = p1.Y;
 
-                                while (x <= p2.X)
+                                myBitmap.SetPixel(x, y, lineColor);
+                                while (x < p2.X)
                                 {
-                                    myBitmap.SetPixel(x, y, lineColor);
                                     x++;
-                                    if (d < 0) // M is below the line, pick R
-                                    {
-                                        d = d + dR;
-                                    }
-                                    else // M is either on the line or above the line, either case pick UR
-                                    {
-                                        d = d + dUR;
-                                        y--;
-                                    }
-                                }
-                            }
-                            else // 9
-                            {
-                                int dR = 2 * dy;
-                                int dUR = 2 * (dy - dx);
-                                int d = 2 * dy - dx;
-
-                                int x = p1.X;
-                                int y = p1.Y;
-
-                                while (x <= p2.X)
-                                {
-                                    myBitmap.SetPixel(x, y, lineColor);
-                                    x++;
-                                    if (d < 0) // M is below the line, pick R
+                                    if (d <= 0) // M is below the line, pick R
                                     {
                                         d = d + dR;
                                     }
@@ -265,25 +230,76 @@ namespace ProgrammingAssignment1
                                         d = d + dUR;
                                         y++;
                                     }
+                                    myBitmap.SetPixel(x, y, lineColor);
+                                }
+                            }
+                            else // 16
+                            {
+                                int dR = 2 * dy;
+                                int dUR = 2 * (dy + dx);
+                                int d = 2 * dy - dx;
+
+                                int x = p1.X;
+                                int y = p1.Y;
+
+                                myBitmap.SetPixel(x, y, lineColor);
+                                while (x < p2.X)
+                                {
+                                    x++;
+                                    if (d < 0) // M is below the line, pick R
+                                    {
+                                        d = d + dUR;
+                                        y--;
+                                    }
+                                    else // M is either on the line or above the line, either case pick UR
+                                    {
+                                        d = d + dR;
+                                    }
+                                    myBitmap.SetPixel(x, y, lineColor);
                                 }
                             }
                         }
                         else
                         {
-                            if (p2.Y > p1.Y) // 13
+                            if (p2.Y > p1.Y) // 12
                             {
-                                int dR = 2 * dy;
-                                int dUR = 2 * (dy - dx);
-                                int d = 2 * dy - dx;
+                                int dR = -2 * dy;
+                                int dUR = -2 * (dy + dx);
+                                int d = dx;
 
                                 int x = p1.X;
                                 int y = p1.Y;
 
-                                while (x >= p2.X)
+                                myBitmap.SetPixel(x, y, lineColor);
+                                while (x > p2.X)
                                 {
-                                    myBitmap.SetPixel(x, y, lineColor);
                                     x--;
                                     if (d < 0) // M is below the line, pick R
+                                    {
+                                        y++;
+                                        d = d + dUR;
+                                    }
+                                    else // M is either on the line or above the line, either case pick UR
+                                    {
+                                        d = d + dR;
+                                    }
+                                    myBitmap.SetPixel(x, y, lineColor);
+                                }
+                            }
+                            else // 13
+                            {
+                                int dR = -2 * dy;
+                                int dUR = -2 * (dy - dx);
+                                int d = - dx;
+
+                                int x = p1.X;
+                                int y = p1.Y;
+
+                                myBitmap.SetPixel(x, y, lineColor);
+                                while (x > p2.X)
+                                {
+                                    x--;
+                                    if (d <= 0) // M is below the line, pick R
                                     {
                                         d = d + dR;
                                     }
@@ -292,30 +308,7 @@ namespace ProgrammingAssignment1
                                         d = d + dUR;
                                         y--;
                                     }
-                                }
-                            }
-                            else // 12
-                            {
-                                int dR = 2 * dy;
-                                int dUR = 2 * (dy - dx);
-                                int d = 2 * dy - dx;
-
-                                int x = p1.X;
-                                int y = p1.Y;
-
-                                while (x >= p2.X)
-                                {
                                     myBitmap.SetPixel(x, y, lineColor);
-                                    x--;
-                                    if (d < 0) // M is below the line, pick R
-                                    {
-                                        d = d + dR;
-                                    }
-                                    else // M is either on the line or above the line, either case pick UR
-                                    {
-                                        d = d + dUR;
-                                        y++;
-                                    }
                                 }
                             }
                         }
@@ -325,47 +318,48 @@ namespace ProgrammingAssignment1
                     {
                         if (p2.X > p1.X)
                         {
-                            if (p2.Y > p1.Y) // 15
+                            if (p2.Y > p1.Y) // 10
                             {
                                 int dR = 2 * dx;
-                                int dUR = 2 * (dx - dy);
-                                int d = 2 * dx - dy;
+                                int dUR = 2 * (dy - dx);
+                                int d = dy - 2 * dx;
 
                                 int x = p1.X;
                                 int y = p1.Y;
 
-                                while (y >= p2.Y)
+                                myBitmap.SetPixel(x, y, lineColor);
+                                while (y < p2.Y)
                                 {
-                                    myBitmap.SetPixel(x, y, lineColor);
-                                    y--;
-
-                                    if (d < 0)
-                                    {
-                                        d = d + dR;
-                                    }
-                                    else
-                                    {
-                                        d = d + dUR;
-                                        x++;
-                                    }
-                                }
-                            }
-                            else // 10
-                            {
-                                int dR = 2 * dx;
-                                int dUR = 2 * (dx - dy);
-                                int d = 2 * dx - dy;
-
-                                int x = p1.X;
-                                int y = p1.Y;
-
-                                while (y <= p2.Y)
-                                {
-                                    myBitmap.SetPixel(x, y, lineColor);
                                     y++;
 
                                     if (d < 0)
                                     {
+                                        d = d + dUR;
+                                        x++;
+                                    }
+                                    else
+                                    {
+                                        d = d + dR;
+                                    }
+                                    myBitmap.SetPixel(x, y, lineColor);
+                                }
+                            }
+                            else // 15
+                            {
+                                int dR = 2 * dx;
+                                int dUR = 2 * (dy + dx);
+                                int d = dy;
+
+                                int x = p1.X;
+                                int y = p1.Y;
+
+                                myBitmap.SetPixel(x, y, lineColor);
+                                while (y > p2.Y)
+                                {
+                                    y--;
+
+                                    if (d <= 0)
+                                    {
                                         d = d + dR;
                                     }
                                     else
@@ -373,26 +367,27 @@ namespace ProgrammingAssignment1
                                         d = d + dUR;
                                         x++;
                                     }
+                                    myBitmap.SetPixel(x, y, lineColor);
                                 }
                             }
                         }
                         else
                         {
-                            if (p2.Y > p1.Y) // 14
+                            if (p2.Y > p1.Y) // 11
                             {
-                                int dR = 2 * dx;
-                                int dUR = 2 * (dx - dy);
-                                int d = 2 * dx - dy;
+                                int dR = -2 * dx;
+                                int dUR = -2 * (dy + dx);
+                                int d = dy - 2 * dx ;
 
                                 int x = p1.X;
                                 int y = p1.Y;
 
-                                while (y >= p2.Y)
+                                myBitmap.SetPixel(x, y, lineColor);
+                                while (y < p2.Y)
                                 {
-                                    myBitmap.SetPixel(x, y, lineColor);
-                                    y--;
+                                    y++;
 
-                                    if (d < 0)
+                                    if (d <= 0)
                                     {
                                         d = d + dR;
                                     }
@@ -401,250 +396,40 @@ namespace ProgrammingAssignment1
                                         d = d + dUR;
                                         x--;
                                     }
+                                    myBitmap.SetPixel(x, y, lineColor);
                                 }
                             }
-                            else // 11
+                            else // 14
                             {
                                 int dR = 2 * dx;
-                                int dUR = 2 * (dx - dy);
-                                int d = 2 * dx - dy;
+                                int dUR = -2 * (dy - dx);
+                                int d = dy;
 
                                 int x = p1.X;
                                 int y = p1.Y;
 
-                                while (y <= p2.Y)
+                                myBitmap.SetPixel(x, y, lineColor);
+                                while (y > p2.Y)
                                 {
-                                    myBitmap.SetPixel(x, y, lineColor);
-                                    y++;
+                                    y--;
 
                                     if (d < 0)
-                                    {
-                                        d = d + dR;
-                                    }
-                                    else
                                     {
                                         d = d + dUR;
                                         x--;
                                     }
+                                    else
+                                    {
+                                        d = d + dR;
+                                    }
+                                    myBitmap.SetPixel(x, y, lineColor);
                                 }
                             }
+                        
                         }
                     }
-                    /*
-                    // Bresenham Line Algorithm (Case 9-16)
-                    if (p2.X > p1.X) // |dx| > |dy|
-                    {
-                        if (p2.Y > p1.Y)
-                        {
-                            int dR = 2 * dy;
-                            int dUR = 2 * (dy - dx);
-                            int d = 2 * dy - dx;
-
-                            int x = p1.X;
-                            int y = p1.Y;
-
-                            while (x <= p2.X)
-                            {
-                                myBitmap.SetPixel(x, y, lineColor);
-                                x++;
-                                if (d < 0) // M is below the line, pick R
-                                {
-                                    d = d + dR;
-                                }
-                                else // M is either on the line or above the line, either case pick UR
-                                {
-                                    d = d + dUR;
-                                    y--;
-                                }
-                            }
-                        }
-                        else // Case 16 (theta < 45 degree 4th quadrant)
-                        {
-                            int dR = 2 * dy;
-                            int dUR = 2 * (dy - dx);
-                            int d = 2 * dy - dx;
-
-                            int x = p1.X;
-                            int y = p1.Y;
-
-                            while (x <= p2.X)
-                            {
-                                myBitmap.SetPixel(x, y, lineColor);
-                                x++;
-                                if (d < 0) // M is below the line, pick R
-                                {
-                                    d = d + dR;
-                                }
-                                else // M is either on the line or above the line, either case pick UR
-                                {
-                                    d = d + dUR;
-                                    y++;
-                                }
-                            }
-                        }
-                    }
-                    else 
-                    {
-                        if (p2.Y > p1.Y) // Case 12 (theta < 45 degree 2nd quadrant)
-                        {
-                            int dR = 2 * dy;
-                            int dUR = 2 * (dy - dx);
-                            int d = 2 * dy - dx;
-
-                            int x = p1.X;
-                            int y = p1.Y;
-
-                            while (x >= p2.X)
-                            {
-                                myBitmap.SetPixel(x, y, lineColor);
-                                x--;
-                                if (d < 0) // M is below the line, pick R
-                                {
-                                    d = d + dR;
-                                }
-                                else // M is either on the line or above the line, either case pick UR
-                                {
-                                    d = d + dUR;
-                                    y--;
-                                }
-                            }
-                        }
-                        else // Case 13 (theta < 45 degree 3rd quadrant)
-                        {
-                            int dR = 2 * dy;
-                            int dUR = 2 * (dy - dx);
-                            int d = 2 * dy - dx;
-
-                            int x = p1.X;
-                            int y = p1.Y;
-
-                            while (x >= p2.X)
-                            {
-                                myBitmap.SetPixel(x, y, lineColor);
-                                x--;
-                                if (d < 0) // M is below the line, pick R
-                                {
-                                    d = d + dR;
-                                }
-                                else // M is either on the line or above the line, either case pick UR
-                                {
-                                    d = d + dUR;
-                                    y--;
-                                }
-                            }
-                        }
-                    }
-                    // |dy| > |dx|
-                    if (p2.X > p1.X)
-                    {
-                        if (p2.Y >p1.Y) // Case 10 (theta > 45 degree 1st quadrant)
-                        {
-                            int dR = 2 * dx;
-                            int dUR = 2 * (dx - dy);
-                            int d = 2 * dx - dy;
-
-                            int x = p1.X;
-                            int y = p1.Y;
-
-                            while (y >= p2.Y)
-                            {
-                                myBitmap.SetPixel(x, y, lineColor);
-                                y--;
-
-                                if (d < 0)
-                                {
-                                    d = d + dR;
-                                }
-                                else
-                                {
-                                    d = d + dUR;
-                                    x++;
-                                }
-                            }
-                        }
-                        else // Case 15 (theta > 45 degree 4th quadrant)
-                        {
-                            int dR = 2 * dx;
-                            int dUR = 2 * (dx - dy);
-                            int d = 2 * dx - dy;
-
-                            int x = p1.X;
-                            int y = p1.Y;
-
-                            while (y <= p2.Y)
-                            {
-                                myBitmap.SetPixel(x, y, lineColor);
-                                y++;
-
-                                if (d < 0)
-                                {
-                                    d = d + dR;
-                                }
-                                else
-                                {
-                                    d = d + dUR;
-                                    x++;
-                                }
-                            }
-                        }
-                    }
-                    else
-                    {
-                        if (p2.Y > p1.Y) // Case 11 (theta > 45 degree 2nd quadrant)
-                        {
-                            int dR = 2 * dx;
-                            int dUR = 2 * (dx - dy);
-                            int d = 2 * dx - dy;
-
-                            int x = p1.X;
-                            int y = p1.Y;
-
-                            while (y >= p2.Y)
-                            {
-                                myBitmap.SetPixel(x, y, lineColor);
-                                y--;
-
-                                if (d < 0)
-                                {
-                                    d = d + dR;
-                                }
-                                else
-                                {
-                                    d = d + dUR;
-                                    x--;
-                                }
-                            }
-                        }
-                        else // Case 14 (theta > 45 degree 3rd quadrant)
-                        {
-                            int dR = 2 * dx;
-                            int dUR = 2 * (dx - dy);
-                            int d = 2 * dx - dy;
-
-                            int x = p1.X;
-                            int y = p1.Y;
-
-                            while (y <= p2.Y)
-                            {
-                                myBitmap.SetPixel(x, y, lineColor);
-                                y++;
-
-                                if (d < 0)
-                                {
-                                    d = d + dR;
-                                }
-                                else
-                                {
-                                    d = d + dUR;
-                                    x--;
-                                }
-                            }
-                        }
-
-
-                    }
-                    */
-                    break;
+                    drawingScreen.Refresh();
+            break;
                     
                 case 3:
                     if (p1.Y == p2.Y) // Cover Case 1 & 2
