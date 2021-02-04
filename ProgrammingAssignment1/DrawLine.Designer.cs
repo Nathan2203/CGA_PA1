@@ -35,18 +35,20 @@ namespace ProgrammingAssignment1
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.loadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
-            this.lineButton = new System.Windows.Forms.ToolStripButton();
-            this.dotButton = new System.Windows.Forms.ToolStripButton();
-            this.colorButton = new System.Windows.Forms.ToolStripButton();
-            this.dotLineButton = new System.Windows.Forms.ToolStripButton();
-            this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.numericUpDownWidth = new System.Windows.Forms.NumericUpDown();
             this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.clearScreenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.colorDialog1 = new System.Windows.Forms.ColorDialog();
+            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+            this.dotButton = new System.Windows.Forms.ToolStripButton();
+            this.lineButton = new System.Windows.Forms.ToolStripButton();
+            this.dotLineButton = new System.Windows.Forms.ToolStripButton();
+            this.colorButton = new System.Windows.Forms.ToolStripButton();
             this.clearButton = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
+            this.numericUpDownWidth = new System.Windows.Forms.NumericUpDown();
+            this.colorDialog1 = new System.Windows.Forms.ColorDialog();
+            this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             ((System.ComponentModel.ISupportInitialize)(this.drawingScreen)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
@@ -58,8 +60,9 @@ namespace ProgrammingAssignment1
             this.drawingScreen.BackColor = System.Drawing.Color.White;
             this.drawingScreen.Dock = System.Windows.Forms.DockStyle.Fill;
             this.drawingScreen.Location = new System.Drawing.Point(0, 28);
+            this.drawingScreen.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.drawingScreen.Name = "drawingScreen";
-            this.drawingScreen.Size = new System.Drawing.Size(800, 422);
+            this.drawingScreen.Size = new System.Drawing.Size(600, 338);
             this.drawingScreen.TabIndex = 0;
             this.drawingScreen.TabStop = false;
             this.drawingScreen.MouseDown += new System.Windows.Forms.MouseEventHandler(this.drawingScreen_MouseDown);
@@ -73,7 +76,8 @@ namespace ProgrammingAssignment1
             this.editToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(800, 28);
+            this.menuStrip1.Padding = new System.Windows.Forms.Padding(4, 2, 0, 2);
+            this.menuStrip1.Size = new System.Drawing.Size(600, 28);
             this.menuStrip1.TabIndex = 2;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -91,108 +95,14 @@ namespace ProgrammingAssignment1
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
             this.saveToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.saveToolStripMenuItem.Text = "Save";
+            this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
             // 
             // loadToolStripMenuItem
             // 
             this.loadToolStripMenuItem.Name = "loadToolStripMenuItem";
             this.loadToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.loadToolStripMenuItem.Text = "Load";
-            // 
-            // toolStrip1
-            // 
-            this.toolStrip1.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.toolStrip1.Dock = System.Windows.Forms.DockStyle.Right;
-            this.toolStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.dotButton,
-            this.lineButton,
-            this.dotLineButton,
-            this.colorButton,
-            this.clearButton,
-            this.toolStripSeparator1,
-            this.toolStripLabel1});
-            this.toolStrip1.Location = new System.Drawing.Point(734, 28);
-            this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(66, 422);
-            this.toolStrip1.TabIndex = 3;
-            this.toolStrip1.Text = "toolStrip1";
-            // 
-            // lineButton
-            // 
-            this.lineButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.lineButton.Image = ((System.Drawing.Image)(resources.GetObject("lineButton.Image")));
-            this.lineButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.lineButton.Name = "lineButton";
-            this.lineButton.Size = new System.Drawing.Size(63, 24);
-            this.lineButton.Text = "toolStripButton1";
-            this.lineButton.Click += new System.EventHandler(this.lineButton_Click);
-            // 
-            // dotButton
-            // 
-            this.dotButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.dotButton.Image = ((System.Drawing.Image)(resources.GetObject("dotButton.Image")));
-            this.dotButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.dotButton.Name = "dotButton";
-            this.dotButton.Size = new System.Drawing.Size(63, 24);
-            this.dotButton.Text = "toolStripButton2";
-            this.dotButton.Click += new System.EventHandler(this.dotButton_Click);
-            // 
-            // colorButton
-            // 
-            this.colorButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.colorButton.Image = ((System.Drawing.Image)(resources.GetObject("colorButton.Image")));
-            this.colorButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.colorButton.Name = "colorButton";
-            this.colorButton.Size = new System.Drawing.Size(63, 24);
-            this.colorButton.Text = "toolStripButton3";
-            this.colorButton.Click += new System.EventHandler(this.colorButton_Click);
-            // 
-            // dotLineButton
-            // 
-            this.dotLineButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.dotLineButton.Image = ((System.Drawing.Image)(resources.GetObject("dotLineButton.Image")));
-            this.dotLineButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.dotLineButton.Name = "dotLineButton";
-            this.dotLineButton.Size = new System.Drawing.Size(63, 24);
-            this.dotLineButton.Text = "toolStripButton4";
-            this.dotLineButton.Click += new System.EventHandler(this.dotLineButton_Click);
-            // 
-            // toolStripLabel1
-            // 
-            this.toolStripLabel1.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
-            this.toolStripLabel1.Name = "toolStripLabel1";
-            this.toolStripLabel1.Size = new System.Drawing.Size(63, 23);
-            this.toolStripLabel1.Text = "Width:";
-            // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.toolStripSeparator1.ForeColor = System.Drawing.Color.Red;
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(63, 6);
-            // 
-            // numericUpDownWidth
-            // 
-            this.numericUpDownWidth.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.numericUpDownWidth.Location = new System.Drawing.Point(734, 238);
-            this.numericUpDownWidth.Maximum = new decimal(new int[] {
-            5,
-            0,
-            0,
-            0});
-            this.numericUpDownWidth.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.numericUpDownWidth.Name = "numericUpDownWidth";
-            this.numericUpDownWidth.Size = new System.Drawing.Size(49, 24);
-            this.numericUpDownWidth.TabIndex = 4;
-            this.numericUpDownWidth.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
+            this.loadToolStripMenuItem.Click += new System.EventHandler(this.loadToolStripMenuItem_Click);
             // 
             // editToolStripMenuItem
             // 
@@ -208,6 +118,65 @@ namespace ProgrammingAssignment1
             this.clearScreenToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.clearScreenToolStripMenuItem.Text = "Clear Screen";
             // 
+            // toolStrip1
+            // 
+            this.toolStrip1.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.toolStrip1.Dock = System.Windows.Forms.DockStyle.Right;
+            this.toolStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.dotButton,
+            this.lineButton,
+            this.dotLineButton,
+            this.colorButton,
+            this.clearButton,
+            this.toolStripSeparator1,
+            this.toolStripLabel1});
+            this.toolStrip1.Location = new System.Drawing.Point(534, 28);
+            this.toolStrip1.Name = "toolStrip1";
+            this.toolStrip1.Size = new System.Drawing.Size(66, 338);
+            this.toolStrip1.TabIndex = 3;
+            this.toolStrip1.Text = "toolStrip1";
+            // 
+            // dotButton
+            // 
+            this.dotButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.dotButton.Image = ((System.Drawing.Image)(resources.GetObject("dotButton.Image")));
+            this.dotButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.dotButton.Name = "dotButton";
+            this.dotButton.Size = new System.Drawing.Size(63, 24);
+            this.dotButton.Text = "toolStripButton2";
+            this.dotButton.Click += new System.EventHandler(this.dotButton_Click);
+            // 
+            // lineButton
+            // 
+            this.lineButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.lineButton.Image = ((System.Drawing.Image)(resources.GetObject("lineButton.Image")));
+            this.lineButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.lineButton.Name = "lineButton";
+            this.lineButton.Size = new System.Drawing.Size(63, 24);
+            this.lineButton.Text = "toolStripButton1";
+            this.lineButton.Click += new System.EventHandler(this.lineButton_Click);
+            // 
+            // dotLineButton
+            // 
+            this.dotLineButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.dotLineButton.Image = ((System.Drawing.Image)(resources.GetObject("dotLineButton.Image")));
+            this.dotLineButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.dotLineButton.Name = "dotLineButton";
+            this.dotLineButton.Size = new System.Drawing.Size(63, 24);
+            this.dotLineButton.Text = "toolStripButton4";
+            this.dotLineButton.Click += new System.EventHandler(this.dotLineButton_Click);
+            // 
+            // colorButton
+            // 
+            this.colorButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.colorButton.Image = ((System.Drawing.Image)(resources.GetObject("colorButton.Image")));
+            this.colorButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.colorButton.Name = "colorButton";
+            this.colorButton.Size = new System.Drawing.Size(63, 24);
+            this.colorButton.Text = "toolStripButton3";
+            this.colorButton.Click += new System.EventHandler(this.colorButton_Click);
+            // 
             // clearButton
             // 
             this.clearButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
@@ -218,16 +187,59 @@ namespace ProgrammingAssignment1
             this.clearButton.Text = "toolStripButton1";
             this.clearButton.Click += new System.EventHandler(this.clearButton_Click);
             // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.toolStripSeparator1.ForeColor = System.Drawing.Color.Red;
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(63, 6);
+            // 
+            // toolStripLabel1
+            // 
+            this.toolStripLabel1.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
+            this.toolStripLabel1.Name = "toolStripLabel1";
+            this.toolStripLabel1.Size = new System.Drawing.Size(63, 23);
+            this.toolStripLabel1.Text = "Width:";
+            // 
+            // numericUpDownWidth
+            // 
+            this.numericUpDownWidth.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.numericUpDownWidth.Location = new System.Drawing.Point(550, 193);
+            this.numericUpDownWidth.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.numericUpDownWidth.Maximum = new decimal(new int[] {
+            5,
+            0,
+            0,
+            0});
+            this.numericUpDownWidth.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numericUpDownWidth.Name = "numericUpDownWidth";
+            this.numericUpDownWidth.Size = new System.Drawing.Size(37, 24);
+            this.numericUpDownWidth.TabIndex = 4;
+            this.numericUpDownWidth.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // openFileDialog1
+            // 
+            this.openFileDialog1.FileName = "openFileDialog1";
+            // 
             // DrawLine
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(600, 366);
             this.Controls.Add(this.numericUpDownWidth);
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.drawingScreen);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "DrawLine";
             this.Text = "DrawLine";
             ((System.ComponentModel.ISupportInitialize)(this.drawingScreen)).EndInit();
@@ -260,5 +272,7 @@ namespace ProgrammingAssignment1
         private System.Windows.Forms.NumericUpDown numericUpDownWidth;
         private System.Windows.Forms.ColorDialog colorDialog1;
         private System.Windows.Forms.ToolStripButton clearButton;
+        private System.Windows.Forms.SaveFileDialog saveFileDialog1;
+        private System.Windows.Forms.OpenFileDialog openFileDialog1;
     }
 }

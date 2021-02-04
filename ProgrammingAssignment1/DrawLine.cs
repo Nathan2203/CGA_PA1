@@ -17,6 +17,7 @@ namespace ProgrammingAssignment1
         Point start_point, end_point;
         int selected;
         Color lineColor = Color.Black;
+        Image file;
 
         public DrawLine()
         {
@@ -67,6 +68,31 @@ namespace ProgrammingAssignment1
         {
             drawingScreen.Image = null;
             myGraphic.Clear(Color.White);
+        }
+
+        private void loadToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog f = new OpenFileDialog();
+            f.Filter = "Bitmap Images(*.bmp)| *.bmp | JPG(*.JPG) | *.jpg | All Files(*.*) | *.*";
+
+            if (f.ShowDialog() == DialogResult.OK)
+            {
+                file = Image.FromFile(f.FileName);
+                drawingScreen.Image = file;
+            }
+        }
+
+        private void saveToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+            SaveFileDialog f = new SaveFileDialog();
+            f.Title = "Save Image";
+            f.Filter = "Bitmap Images(*.bmp)| *.bmp | JPG(*.JPG) | *.jpg | All Files(*.*) | *.*";
+
+            if (f.ShowDialog(this) == DialogResult.OK)
+            {
+                myBitmap.Save(f.FileName);
+            }
         }
 
         public void Line(Point p1, Point p2)
